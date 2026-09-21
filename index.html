@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>NovaMerge — 2048-style</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="kicker">One more move</p>
+        <h1>NovaMerge</h1>
+      </div>
+      <div class="scorebox">
+        <span>Score</span><b id="score">0</b>
+        <span>Best</span><b id="best">0</b>
+      </div>
+    </header>
+    <p class="hint">Swipe or use arrows. Merge matching tiles. Reach 2048.</p>
+    <div id="board" class="board"></div>
+    <button id="restart">New game</button>
+    <p id="status"></p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
