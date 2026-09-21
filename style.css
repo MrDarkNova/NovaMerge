@@ -1,11 +1,13 @@
-:root{--bg:#111018;--cell:#1c1b27;--text:#f6f4ff}
-*{box-sizing:border-box}body{margin:0;background:#0d0c14;color:var(--text);font-family:ui-sans-serif,system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}
-main{width:min(440px,94vw);padding:20px 0 48px}
+:root{--bg:#0d0c14;--text:#f6f4ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(500px 280px at 50% -10%,#3b2a86 0%,var(--bg) 55%);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}
+main{width:min(440px,94vw);padding:24px 0 56px}
 header{display:flex;justify-content:space-between;align-items:end;gap:12px}
+.brand{display:flex;gap:10px;align-items:center}
 .kicker{letter-spacing:.16em;text-transform:uppercase;color:#c4b5fd;font-size:11px;margin:0}
-h1{margin:4px 0 0;font-size:36px}
-.scorebox{display:grid;grid-template-columns:auto auto;gap:4px 12px;background:#1a1824;padding:10px 12px;border-radius:12px;font-size:12px}
+h1{margin:2px 0 0;font-family:Syne,sans-serif;font-size:34px}
+.scorebox{display:grid;grid-template-columns:auto auto;gap:4px 12px;background:#1a1824;padding:10px 12px;border-radius:14px;font-size:12px;border:1px solid #2c2a3c}
 .hint{color:#9b98b0}
-.board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#16141f;padding:8px;border-radius:16px;touch-action:none}
-.tile{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;font-size:28px;font-weight:800;background:var(--cell)}
-button{margin-top:14px;border:0;border-radius:999px;padding:10px 16px;background:#7c5cfc;color:#fff;font-weight:700;cursor:pointer}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#16141f;padding:8px;border-radius:18px;touch-action:none;border:1px solid #2c2a3c}
+.tile{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;font-size:28px;font-weight:800;background:#1c1b27}
+button{margin-top:16px;border:0;border-radius:999px;padding:11px 18px;background:#7c5cfc;color:#fff;font-weight:700;cursor:pointer}
+#status{min-height:1.4em;color:#c4b5fd}

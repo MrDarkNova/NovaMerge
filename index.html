@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <title>NovaMerge — 2048-style</title>
+  <title>NovaMerge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main>
     <header>
-      <div>
-        <p class="kicker">One more move</p>
-        <h1>NovaMerge</h1>
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#7c5cfc"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#fff"/><rect x="20" y="8" width="8" height="8" rx="2" fill="#c4b5fd"/><rect x="8" y="20" width="8" height="8" rx="2" fill="#c4b5fd"/><rect x="20" y="20" width="8" height="8" rx="2" fill="#fff"/></svg>
+        <div>
+          <p class="kicker">One more move</p>
+          <h1>NovaMerge</h1>
+        </div>
       </div>
       <div class="scorebox">
         <span>Score</span><b id="score">0</b>
         <span>Best</span><b id="best">0</b>
       </div>
     </header>
-    <p class="hint">Swipe or use arrows. Merge matching tiles. Reach 2048.</p>
+    <p class="hint">Swipe or use arrows. Merge twins. Chase 2048, then keep going.</p>
     <div id="board" class="board"></div>
     <button id="restart">New game</button>
     <p id="status"></p>
