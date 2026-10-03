@@ -1,32 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <title>NovaMerge</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="A polished, local-first 2048-style merge puzzle. One more move, always.">
+  <meta property="og:title" content="NovaMerge — One More Move">
+  <meta property="og:description" content="Slide, merge matching tiles, and keep your chain alive in this local-first puzzle.">
+  <meta property="og:type" content="website">
+  <title>NovaMerge — One More Move</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <header>
-      <div class="brand">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="18" fill="#f3eadc"/><rect x="8" y="8" width="8" height="8" rx="2" fill="#1a120c"/><rect x="20" y="8" width="8" height="8" rx="2" fill="#c4a46a"/><rect x="8" y="20" width="8" height="8" rx="2" fill="#c4a46a"/><rect x="20" y="20" width="8" height="8" rx="2" fill="#1a120c"/></svg>
-        <div>
-          <p class="kicker">One more move</p>
-          <h1>NovaMerge</h1>
-        </div>
-      </div>
-      <div class="scorebox">
-        <span>Score</span><b id="score">0</b>
-        <span>Best</span><b id="best">0</b>
-      </div>
+  <div class="ambient-glow glow-one" aria-hidden="true"></div><div class="ambient-glow glow-two" aria-hidden="true"></div>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="NovaMerge home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="13" fill="url(#brandFill)"/><path d="M20 7.5 10.5 13 20 18.5l9.5-5.5L20 7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m10.5 19 9.5 5.5 9.5-5.5M10.5 25 20 30.5 29.5 25" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="brandFill" x1="1" y1="1" x2="39" y2="39"><stop stop-color="#f4dfad"/><stop offset="1" stop-color="#d9a75a"/></linearGradient></defs></svg></span>
+        <span class="brand-wordmark"><strong>NOVA<span>/</span>MERGE</strong><small>THE 2048 PUZZLE</small></span>
+      </a>
+      <div class="topbar-tools"><div class="save-status"><span class="save-light" id="saveLight"></span><span id="saveLabel">Saved on this device</span></div><button class="help-button" id="helpBtn" type="button"><span class="help-mark">?</span> How to play</button></div>
     </header>
-    <p class="hint">Swipe or use arrows. Merge twins. Chase 2048, then keep going.</p>
-    <div id="board" class="board"></div>
-    <button id="restart">New game</button>
-    <p id="status"></p>
-  </main>
+
+    <main>
+      <section class="intro">
+        <div class="intro-copy"><div class="eyebrow"><span class="eyebrow-rule"></span> ONE MORE MOVE, ALWAYS</div><h1>Make space.<br><span>Make something bigger.</span></h1><p>Slide the board, combine matching numbers, and keep the chain alive.</p></div>
+        <div class="intro-stamp" aria-label="Classic four by four puzzle"><span>4 × 4</span><small>CLASSIC GRID</small></div>
+      </section>
+
+      <section class="game-layout" aria-label="NovaMerge game">
+        <aside class="side-column left-column" aria-label="Game controls and score">
+          <section class="score-card current-score"><div class="card-label"><span class="label-icon score-icon">✳</span> CURRENT SCORE</div><div class="score-number" id="score" aria-live="off">0</div><div class="score-gain" id="scoreGain" aria-hidden="true"></div></section>
+          <div class="mini-stats"><section class="mini-stat"><span class="card-label">PERSONAL BEST</span><strong id="best">0</strong></section><section class="mini-stat"><span class="card-label">MOVES MADE</span><strong id="moves">0</strong></section></div>
+          <section class="next-card"><div class="next-copy"><div class="card-label">UP NEXT</div><p>A new tile is ready.</p></div><div class="next-tile" id="nextTileVisual" data-level="1" aria-hidden="true"><span id="nextValue">2</span></div></section>
+          <div class="control-stack"><button class="control-button undo-button" id="undoBtn" type="button" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 6 3.5 9.5 7 13M4 9.5h7a5 5 0 0 1 0 10h-1" transform="translate(0 -3)"/></svg><span>Undo move</span><kbd>U</kbd></button><button class="control-button new-button" id="newGameBtn" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 9a6 6 0 1 0 1 4M16 4v5h-5"/></svg><span>New game</span><kbd>R</kbd></button><button class="control-button share-button" id="shareBtn" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="15" cy="4.5" r="2.2"/><circle cx="5" cy="10" r="2.2"/><circle cx="15" cy="15.5" r="2.2"/><path d="m7 9 5.9-3.4M7 11l5.9 3.4"/></svg><span>Share score</span></button></div>
+          <div class="key-guide"><div class="card-label">MOVE WITH</div><div class="key-row"><span class="key-cap">↑</span><span class="key-cap">←</span><span class="key-cap">↓</span><span class="key-cap">→</span><span class="key-or">OR</span><span class="key-cap">W</span><span class="key-cap">A</span><span class="key-cap">S</span><span class="key-cap">D</span></div><p>Swipe in any direction on touch.</p></div>
+        </aside>
+
+        <div class="game-center" id="gameCenter">
+          <div class="board-heading"><div class="run-status"><span class="status-pulse" id="statusPulse"></span><span id="runLabel">YOUR RUN</span></div><div class="goal-label">GOAL <strong>2048</strong></div></div>
+          <div class="board-frame"><div class="board" id="board" role="grid" aria-label="NovaMerge game board, four rows and four columns" aria-describedby="boardHelp" tabindex="0"><div class="cell-layer" id="cellLayer" aria-hidden="true"></div><div class="tile-layer" id="tileLayer"></div></div><div class="board-corner corner-a" aria-hidden="true"></div><div class="board-corner corner-b" aria-hidden="true"></div></div>
+          <p class="board-help" id="boardHelp"><span class="board-help-icon">↗</span> Use your keyboard or swipe to move every tile.</p>
+          <div class="board-message" id="boardMessage" aria-live="polite">Every move matters. Take your time.</div>
+        </div>
+
+        <aside class="side-column right-column" aria-label="Goal and game guide">
+          <section class="goal-card"><div class="card-topline"><span class="card-label">THE CLASSIC GOAL</span><span class="goal-orbit" aria-hidden="true">◎</span></div><div class="goal-number">Reach <strong>2048</strong></div><div class="progress-track" role="progressbar" id="goalProgress" aria-label="Progress toward 2048" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="goalBar"></span></div><div class="progress-caption"><span id="highestTile">Highest tile: 0</span><span id="goalPercent">0%</span></div></section>
+          <section class="guide-card"><div class="card-label">THE SHORT VERSION</div><div class="guide-step"><span class="step-number">01</span><p><strong>Slide</strong> every tile in one direction.</p></div><div class="guide-step"><span class="step-number">02</span><p><strong>Combine</strong> twins into the next number.</p></div><div class="guide-step"><span class="step-number">03</span><p><strong>Plan ahead.</strong> A move that makes no change won’t add a tile.</p></div></section>
+          <section class="local-card"><span class="local-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 2.5 3.5 5v4.4c0 4.1 2.8 6.8 6.5 8.1 3.7-1.3 6.5-4 6.5-8.1V5L10 2.5Z"/><path d="m7.5 10 1.7 1.7 3.5-3.6"/></svg></span><div><strong>Your run is private</strong><p>Progress saves in this browser. No account needed.</p></div></section>
+        </aside>
+      </section>
+    </main>
+    <footer class="page-footer"><span>NOVA / MERGE</span><span>BUILT FOR THE NEXT MOVE</span><span>BEST SCORE SAVED LOCALLY</span></footer>
+  </div>
+
+  <div class="dialog-backdrop" id="dialog" hidden>
+    <section class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialogBody"><button class="dialog-close" id="dialogClose" type="button" aria-label="Close dialog">×</button><div class="dialog-emblem" id="dialogEmblem" aria-hidden="true">✳</div><div class="eyebrow dialog-kicker" id="dialogKicker">NOVA / MERGE</div><h2 id="dialogTitle">Ready?</h2><p id="dialogBody"></p><div class="dialog-actions"><button class="dialog-secondary" id="dialogSecondary" type="button">Cancel</button><button class="dialog-primary" id="dialogPrimary" type="button">Continue</button></div></section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
   <script src="app.js"></script>
 </body>
 </html>

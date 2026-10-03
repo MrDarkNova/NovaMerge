@@ -1,22 +1,21 @@
-<div align="center">
+# NovaMerge
 
-<img src="https://img.shields.io/badge/DARKNOVA-NOVAMERGE-7c5cfc?style=for-the-badge&labelColor=050508&color=7c5cfc" />
+A polished, local-first 2048-style merge puzzle. Slide matching tiles together, build toward 2048, and keep going after the milestone.
 
-<br /><br />
+**Play:** https://nova-merge.vercel.app
 
-![Game](https://img.shields.io/badge/Game-2048%20style-7c5cfc?style=flat-square&labelColor=050508)
-![Score](https://img.shields.io/badge/Best-localStorage-7c5cfc?style=flat-square&labelColor=050508)
+## Play
 
-<br />
+- Use the arrow keys or **W A S D**, or swipe on the board.
+- Matching tiles merge once per move; a move that changes nothing does not spawn a tile.
+- The next tile is previewed before it enters the board.
+- **U** or **Undo move** reverses the last move. One undo is available at a time.
+- **R** opens the new-run confirmation.
+- Progress and your personal best are saved in this browser. No account is required.
+- **Share score** uses the device share sheet where available, with a copy-to-clipboard fallback.
 
-**Merge tiles. One more move. Best score saved on this device.**
+## Run locally
 
-[Live demo](https://nova-merge.vercel.app) · [Portfolio](https://www.mrdarknova.com)
+Open `index.html` in a modern browser, or serve the repository as a static site. The game has no build step or backend. `style.css` provides the interface and `app.js` contains the game logic.
 
-</div>
-
-<div align="center">
-
-**Built by [MR. DARKNOVA](https://www.mrdarknova.com)**
-
-</div>
+The game loads its display fonts from Google Fonts. Game progress is stored only in browser `localStorage`.
